@@ -1,8 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from features import MAIL
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
+
 # khơi tạo web app 
 app = FastAPI()
 
+templates = Jinja2Templates(directory="templates")
 # Xây dựng api đầu tiên
 # root
 @app.get("/")
@@ -42,3 +47,10 @@ def send_email_for_client(receiver: str, content: str, subject: str):
         return {"receiver": receiver,"sent": status}
     else:
         return {"sent": status}
+
+
+# URL 
+@app.get("/template")
+def get_demo_template(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+    
