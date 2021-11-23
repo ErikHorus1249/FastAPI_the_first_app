@@ -18,3 +18,10 @@ hai thư viện: Fastapi, Urvicon:
 Chạy:
 
 `$ uvicorn main:app --reload`
+
+
+`$ pip install aiofiles`
+
+`$ pip install python-multipart`
+
+`$ pip install gunicorn`

@@ -1,13 +1,18 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, File, UploadFile
 from features import MAIL
-from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-
+from fastapi.staticfiles import StaticFiles
+import aiofiles
 
 # khơi tạo web app 
 app = FastAPI()
 
+# static dir registry 
+app.mount("/media", StaticFiles(directory="media"), name="media")
+
+# khoi tao bien template 
 templates = Jinja2Templates(directory="templates")
+
 # Xây dựng api đầu tiên
 # root
 @app.get("/")
@@ -50,7 +55,24 @@ def send_email_for_client(receiver: str, content: str, subject: str):
 
 
 # URL 
-@app.get("/template")
-def get_demo_template(request: Request):
+# @app.get("/template")
+# def get_demo_template(request: Request):
+#     return templates.TemplateResponse("index.html", {"request": request})
+
+@app.get("/form")
+def get_demo_form(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
-    
+
+@app.get("/form2")
+def get_demo_form(request: Request):
+    return templates.TemplateResponse("index1.html", {"request": request})
+
+@app.post("/files")
+async def upload_file(upload_file: UploadFile = File(...)):
+    file_name = upload_file.filename
+    file_path = f"media/{file_name}"
+    async with aiofiles.open(file_path, "wb") as file_handler:
+        content = upload_file.read();
+        file_handler.write(content)
+        
+    return {"status": True}
