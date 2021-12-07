@@ -26,12 +26,11 @@ templates = Jinja2Templates(directory="media/templates")
 # root
 @app.get("/")
 def get_root():
-    print("Nhận request")
+    # Json 
     # return {'data':'this is root dir'}
-    return "Đây là thư mục gốc"
-    # {key}
-    # json 
-    # localhost:5500/
+    # String 
+    return "this is root dir"
+
 
 # URL 
 @app.get("/home")
@@ -72,7 +71,7 @@ def send_email_for_client(receiver: str, content: str, subject: str):
 
 @app.get("/form")
 def get_demo_form(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("ajax.html", {"request": request})
 
 @app.get("/form2")
 def get_demo_form(request: Request):

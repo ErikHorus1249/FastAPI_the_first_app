@@ -7,8 +7,8 @@
     $(document).ready(function () {
       $("button").click(function () {
         $.ajax({
-          url: "http://127.0.0.1:8000/", success: function (result) {
-            $("#div1").html(result);
+          url: "https://demoapp-pyhton.herokuapp.com/", success: function (result) {
+            $("#content").html(result);
           }
         });
       });
@@ -19,7 +19,7 @@
 <body>
 
   <div id="div1">
-    <h2>Nội dung sẽ hiển thị khi server phản hồi</h2>
+    <h2 id="content">Nội dung sẽ hiển thị khi server phản hồi</h2>
   </div>
 
   <button>Lấy nội dung</button>
