@@ -3,21 +3,32 @@ from features import MAIL
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 import aiofiles
+from fastapi.middleware.cors import CORSMiddleware
 
 # khơi tạo web app 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # static dir registry 
 app.mount("/media", StaticFiles(directory="media"), name="media")
 
 # khoi tao bien template 
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="media/templates")
 
 # Xây dựng api đầu tiên
 # root
 @app.get("/")
 def get_root():
-    return {'data':'this is root dir'}
+    print("Nhận request")
+    # return {'data':'this is root dir'}
+    return "Đây là thư mục gốc"
     # {key}
     # json 
     # localhost:5500/
@@ -67,10 +78,16 @@ def get_demo_form(request: Request):
 def get_demo_form(request: Request):
     return templates.TemplateResponse("index1.html", {"request": request})
 
+# upload file 
 @app.post("/files")
 async def upload_file(upload_file: UploadFile = File(...)):
+    # tao bien de lu ten file 
     file_name = upload_file.filename
+    # khai bao noi luu tru 
+    # media/main.png 
     file_path = f"media/{file_name}"
+    # file_path = "media/" + file_name
+    # wb - write binary 
     async with aiofiles.open(file_path, "wb") as file_handler:
         content = upload_file.read();
         file_handler.write(content)

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("button").click(function () {
+        $.ajax({
+          url: "http://127.0.0.1:8000/", success: function (result) {
+            $("#div1").html(result);
+          }
+        });
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+  <div id="div1">
+    <h2>Nội dung sẽ hiển thị khi server phản hồi</h2>
+  </div>
+
+  <button>Lấy nội dung</button>
+
+</body>
+
+</html>
