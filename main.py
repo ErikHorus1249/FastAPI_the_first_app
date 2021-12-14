@@ -59,9 +59,11 @@ def login_with_get_method(pwd: str, user_name: str):
 def send_email_for_client(receiver: str, content: str, subject: str):
     status = MAIL.send_mail(receiver, content, subject)
     if status:
-        return {"receiver": receiver,"sent": status}
+        # return {"receiver": receiver,"sent": status}
+        return "Gửi thành công"
     else:
-        return {"sent": status}
+        return "Gửi thất bại"
+        # return {"sent": status}
 
 
 # URL 
@@ -73,9 +75,9 @@ def send_email_for_client(receiver: str, content: str, subject: str):
 def get_demo_form(request: Request):
     return templates.TemplateResponse("ajax.html", {"request": request})
 
-@app.get("/form2")
+@app.get("/register")
 def get_demo_form(request: Request):
-    return templates.TemplateResponse("index1.html", {"request": request})
+    return templates.TemplateResponse("send_request.html", {"request": request})
 
 # upload file 
 @app.post("/files")
