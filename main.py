@@ -55,7 +55,7 @@ def login_with_get_method(pwd: str, user_name: str):
 # https://vi.wikipedia.org/wiki/URL
 # protocol 
 
-@app.get("/send_mail")
+@app.post("/send_mail")
 def send_email_for_client(receiver: str, content: str, subject: str):
     status = MAIL.send_mail(receiver, content, subject)
     if status:

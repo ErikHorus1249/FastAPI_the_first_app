@@ -1,13 +1,15 @@
 
 function sendJSON(){
                
+    // fetching data   
     let result = document.querySelector('.result');
-    let name = document.querySelector('#name');
-    let email = document.querySelector('#email');
+    let receiver_email = document.querySelector('#receiver-ml');
+    let subject_email  = document.querySelector('#subject-ml');
+    let content_email  = document.querySelector('#mail-ct');
        
     // Creating a XHR object
     let xhr = new XMLHttpRequest();
-    let url = "submit.php";
+    let url = "http://localhost:5000/send_mail";
 
     // open a connection
     xhr.open("POST", url, true);

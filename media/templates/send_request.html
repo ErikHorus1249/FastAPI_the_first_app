@@ -8,16 +8,20 @@
   
   <body style="text-align:center;" id="body">
     <h1 style="color:rgb(95, 3, 46);">
-      Test hệ thống
+      Nhập nội dung để gửi mail 
     </h1>
   
     <p>
         <!-- Making a text input -->
-        <input type="text" id="name" placeholder="Your name">
-        <input type="email" id="email" placeholder="Email">
-          
+        <input type="email" id="receiver-ml" placeholder="Receiver's Email">
+        <input type="text" id="subject-ml" placeholder="Subject">
+        <br>
+        <br>
+        <textarea id="mail-ct" name="mail-ct" rows="4" cols="50" placeholder="Typing ..."></textarea>
+        <br>
+        <br>
         <!-- Button to send data -->
-        <button onclick="sendJSON()">Send JSON</button>
+        <button onclick="sendJSON()">Send</button>
   
       <!-- For printing result from server -->
       <p class="result" style="color:green"></p>
@@ -25,7 +29,7 @@
    </p>
   
   <!-- Include the JavaScript file -->
-  <script src="index.js"></script>
+  <script src="media/templates/js/send.js"></script>
   
   </body>
 </html>
