@@ -12,7 +12,7 @@ function sendJSON(){
     let url = "https://demoapp-pyhton.herokuapp.com/send_mail?";
 
     // put data to URL 
-    url = url + "receiver="+ receiver_email.value + "&content=" + content_email.value + "&subject=" + content_email.value
+    url = url + "receiver="+ receiver_email.value + "&content=" + content_email.value + "&subject=" + subject_email.value
 
     // open a connection
     xhr.open("POST", url, true);
