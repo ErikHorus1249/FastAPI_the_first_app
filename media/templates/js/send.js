@@ -9,7 +9,9 @@ function sendJSON(){
        
     // Creating a XHR object
     let xhr = new XMLHttpRequest();
-    let url = "http://localhost:8000/send_mail";
+    let url = "https://demoapp-pyhton.herokuapp.com/send_mail?";
+
+    url = url + "receiver="+ receiver_email.value + "&content=" + content_email.value + "&subject=" + content_email.value
 
     // open a connection
     xhr.open("POST", url, true);
@@ -28,8 +30,10 @@ function sendJSON(){
     };
 
     // Converting JSON data to string
-    var data = JSON.stringify({ "name": name.value, "email": email.value });
+    // var data = JSON.stringify({ "receiver": "tuananh1421999@gmail.com", "content": "test", "subject": "test" });
 
+    // console.log(receiver_email.value)
     // Sending data with the request
-    xhr.send(data);
+    // xhr.send(data);
+    xhr.send();
 }
