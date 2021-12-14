@@ -11,6 +11,7 @@ function sendJSON(){
     let xhr = new XMLHttpRequest();
     let url = "https://demoapp-pyhton.herokuapp.com/send_mail?";
 
+    // put data to URL 
     url = url + "receiver="+ receiver_email.value + "&content=" + content_email.value + "&subject=" + content_email.value
 
     // open a connection
@@ -29,11 +30,6 @@ function sendJSON(){
         }
     };
 
-    // Converting JSON data to string
-    // var data = JSON.stringify({ "receiver": "tuananh1421999@gmail.com", "content": "test", "subject": "test" });
 
-    // console.log(receiver_email.value)
-    // Sending data with the request
-    // xhr.send(data);
     xhr.send();
 }
