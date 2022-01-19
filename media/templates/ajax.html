@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("button").click(function () {
+        $.ajax({
+          url: "https://demoapp-pyhton.herokuapp.com/", success: function (result) {
+            $("#content").html(result);
+          }
+        });
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+  <div id="div1">
+    <h2 id="content">Nội dung sẽ hiển thị khi server phản hồi</h2>
+  </div>
+
+  <button>Lấy nội dung</button>
+
+</body>
+
+</html>

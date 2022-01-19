@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      JavaScript | Sending JSON data to server.
+    </title>
+  </head>
+  
+  <body style="text-align:center;" id="body">
+    <h1 style="color:rgb(95, 3, 46);">
+      Nhập nội dung để gửi mail 
+    </h1>
+  
+    <p>
+        <!-- Making a text input -->
+        <input type="email" id="receiver-ml" placeholder="Receiver's Email">
+        <input type="text" id="subject-ml" placeholder="Subject">
+        <br>
+        <br>
+        <textarea id="mail-ct" name="mail-ct" rows="4" cols="50" placeholder="Typing ..."></textarea>
+        <br>
+        <br>
+        <!-- Button to send data -->
+        <button onclick="sendJSON()">Send</button>
+  
+      <!-- For printing result from server -->
+      <p class="result" style="color:green"></p>
+      
+   </p>
+  
+  <!-- Include the JavaScript file -->
+  <script src="media/templates/js/send.js"></script>
+  
+  </body>
+</html>
