@@ -1,56 +1,24 @@
-from fastapi import FastAPI, Request
-from features import MAIL
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
+from fastapi import FastAPI
+from typing import Optional, List
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from Routes.Sensor import sensor
+import os
 
-
-# khơi tạo web app 
+# start app 
 app = FastAPI()
 
-templates = Jinja2Templates(directory="templates")
-# Xây dựng api đầu tiên
-# root
-@app.get("/")
-def get_root():
-    return {'data':'this is root dir'}
-    # {key}
-    # json 
-    # localhost:5500/
+# set_up static file 
+app.mount("/Media", StaticFiles(directory="Media"), name="Media")
 
-# URL 
-@app.get("/home")
-def get_homepage():
-    return "This is a homepage   !"
+# set_up CORS middleware 
+app.add_middleware(
+    CORSMiddleware,
+    allow_credentials=False,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-
-# truy xuất  query xác định bằng 1 dấu hỏi 
-# get / post / push / delete  - method request 
-
-@app.get("/calculator")
-def calculator(a: int , b: int):
-    return {"data": a + b}
-
-# gửi mail
-# GET PUSH DELETE - method  
-@app.get("/login_get")
-def login_with_get_method(pwd: str, user_name: str):
-    return {"login": {"user_name": user_name, "password": pwd, "method": "get"}}
-
-# host  -> URL: http://localhost:8000/home
-# https://vi.wikipedia.org/wiki/URL
-# protocol 
-
-@app.get("/send_mail")
-def send_email_for_client(receiver: str, content: str, subject: str):
-    status = MAIL.send_mail(receiver, content, subject)
-    if status:
-        return {"receiver": receiver,"sent": status}
-    else:
-        return {"sent": status}
-
-
-# URL 
-@app.get("/template")
-def get_demo_template(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
-    
+# route API 
+app.include_router(sensor)
