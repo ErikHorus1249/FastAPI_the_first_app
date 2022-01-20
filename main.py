@@ -5,16 +5,8 @@ import aiofiles
 from fastapi.middleware.cors import CORSMiddleware
 from Routes.Sensor import sensor
 
-# khơi tạo web app 
+# init app with fast api  
 app = FastAPI()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # static dir registry 
 app.mount("/Media", StaticFiles(directory="Media"), name="Media")
