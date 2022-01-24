@@ -4,13 +4,33 @@ from Database.Connect import conn
 from bson.objectid import ObjectId
 from Features import *
 from Features.DateTime import getNow, getUpdateTime, now
+from fastapi.responses import HTMLResponse
 
 sensor = APIRouter()
 
-@sensor.get("/", response_description="Root directory!")
+@sensor.get("/", response_class=HTMLResponse)
 async def get_root():
     
-    return {"data":True}
+    return """
+    <html>
+        <head>
+            <title>Tab Redirect</title>
+            <style>    
+                a {
+                color: #009688;
+                font-family: arial;
+                font-size: 50px;
+                font-style: italic;
+                text-decoration: none;
+                font-weight: bold;
+                }
+            </style>
+        </head>
+        <body>
+            <a href="https://sensorcolln01.herokuapp.com/docs">Go to Swagger!</a> 
+        </body>
+    </html>
+    """
 
 @sensor.post("/Sensors", response_description="Import new data", response_model=SensorSavingModel)
 async def save_sensors_data_to_DB(senData: SensorEntryModel):
