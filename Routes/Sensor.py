@@ -7,6 +7,11 @@ from Features.DateTime import getNow, getUpdateTime, now
 
 sensor = APIRouter()
 
+@sensor.get("/", response_description="Root directory!")
+async def get_root():
+    
+    return {"data":True}
+
 @sensor.post("/Sensor/create", response_description="Add new sensor data", response_model=SensorSavingModel)
 async def create_data(senData: SensorEntryModel):
     
