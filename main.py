@@ -9,7 +9,7 @@ from Routes.Sensor import sensor
 app = FastAPI()
 
 # static dir registry 
-app.mount("/Media", StaticFiles(directory="Media"), name="Media")
+# app.mount("/Media", StaticFiles(directory="Media"), name="Media")
 
 # set_up CORS middleware 
 app.add_middleware(
