@@ -7,7 +7,7 @@ from Features.DateTime import getNow, getUpdateTime, now
 
 sensor = APIRouter()
 
-@sensor.post("/ctfs/create", response_description="Add new sensor data")
+@sensor.post("/Sensor/create", response_description="Add new sensor data", response_model=SensorSavingModel)
 async def create_data(senData: SensorEntryModel):
     
     doc = dict((k, v) for k, v in senData.dict().items() if v is not None)
@@ -15,9 +15,9 @@ async def create_data(senData: SensorEntryModel):
     doc['timestamp'] = now()
     
     # fdoc = SensorSavingModel.parse_obj()
-    
+        
     if res := conn.Sensor.insert_one(doc):
-        return True
+        return SensorSavingModel.parse_obj(conn.Sensor.find_one({'_id':ObjectId(res.inserted_id)})) 
     else:
         return False
     

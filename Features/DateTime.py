@@ -6,7 +6,7 @@ def getNow():
     return f'{x.hour}:{x.minute}:{x.second}:'
     
 def getUpdateTime():
-    return datetime.datetime.now()
+    return str(datetime.datetime.now())
     
 def now():
     return round(time.time(), 1)
