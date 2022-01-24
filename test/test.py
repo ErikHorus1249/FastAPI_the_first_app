@@ -10,9 +10,9 @@ print(token1)
 
 payload = {
     "server" : {
-        "name" : "cirros1",
-        "imageRef": "4f4ebf12-b001-4c72-9f1c-088e63ac8bd8",
-        "flavorRef" : "2",
+        "name" : "Ubuntu",
+        "imageRef": "a3f310c6-22b5-4c16-85c8-21ee0caa4070",
+        "flavorRef" : "auto",
         "security_groups": [
             {
                 "name": "default"
