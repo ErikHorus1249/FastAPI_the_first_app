@@ -12,8 +12,8 @@ async def get_root():
     
     return {"data":True}
 
-@sensor.post("/Sensor/create", response_description="Add new sensor data", response_model=SensorSavingModel)
-async def create_data(senData: SensorEntryModel):
+@sensor.post("/Sensors", response_description="Import new data", response_model=SensorSavingModel)
+async def save_sensors_data_to_DB(senData: SensorEntryModel):
     
     doc = dict((k, v) for k, v in senData.dict().items() if v is not None)
     doc['updatedAt'] = getUpdateTime()
