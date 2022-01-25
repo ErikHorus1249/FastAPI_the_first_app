@@ -22,14 +22,14 @@ class PyObjectId(ObjectId):
         field_schema.update(type="string")
 
 class AccelerometerModel(BaseModel):
-    accelerometerX: float
-    accelerometerY: float
-    accelerometerZ: float
+    accX: float
+    accY: float
+    accZ: float
 
 class GyroscopeModel(BaseModel):
-    gyroscopeX: float
-    gyroscopeY: float
-    gyroscopeZ: float
+    gyX: float
+    gyY: float
+    gyZ: float
 
 class TempvsHumiModel(BaseModel):
     temp: float
@@ -37,21 +37,16 @@ class TempvsHumiModel(BaseModel):
     mois: float
     
 class SensorEntryModel(BaseModel):
-    accelerometer: AccelerometerModel
-    gyroscope: GyroscopeModel
-    tempvshumi: TempvsHumiModel
+    acc: AccelerometerModel
+    gy: GyroscopeModel
+    tvh: TempvsHumiModel
     rain: float
-    
-    # class Config:
-    #     allow_population_by_field_name = True
-    #     arbitrary_types_allowed = True
-    #     json_encoders = {ObjectId: str}
-    
+        
 class SensorSavingModel(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
-    accelerometer: AccelerometerModel
-    gyroscope: GyroscopeModel
-    tempvshumi: TempvsHumiModel
+    acc: AccelerometerModel
+    gy: GyroscopeModel
+    tvh: TempvsHumiModel
     rain: float
     updatedAt: str
     timestamp: float

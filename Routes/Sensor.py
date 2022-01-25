@@ -32,7 +32,8 @@ async def get_root():
     </html>
     """
 
-@sensor.post("/Sensors", response_description="Import new data", response_model=SensorSavingModel)
+# @sensor.post("/Sensors", response_description="Import new data", response_model=SensorSavingModel)
+@sensor.post("/Sensors", response_description="Import new data")
 async def save_sensors_data_to_DB(senData: SensorEntryModel):
     
     doc = dict((k, v) for k, v in senData.dict().items() if v is not None)
@@ -42,6 +43,7 @@ async def save_sensors_data_to_DB(senData: SensorEntryModel):
     # fdoc = SensorSavingModel.parse_obj()
         
     if res := conn.Sensor.insert_one(doc):
+        # return True
         return SensorSavingModel.parse_obj(conn.Sensor.find_one({'_id':ObjectId(res.inserted_id)})) 
     else:
         return False
