@@ -78,3 +78,5 @@ class SensorSavingModel(BaseModel):
 #         }
 
 
+class TestModel(BaseModel):
+    gyX: float
