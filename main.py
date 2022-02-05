@@ -19,12 +19,14 @@ def get_root():
 
 
 @app.get("/get_images")
-def get_token(username: str, password: str, domain: str):
-    token = Connect.get_admin_token(username, password, domain)
-    images = Connect.get_image_list(token)['images']
+def get_token():
+    images = Connect.get_image_list()['images']
+    image_list = []
     for image in images:
-        print(image['id']+" "+image['name'])
-    return True
+        image_info = image['id']+" "+image['name']
+        print(image_info)
+        image_list.append(image_info)
+    return image_list
 
 @app.get("/get_server")
 def get_server_list(username: str, password: str, domain: str):
@@ -37,11 +39,6 @@ def get_server_list(username: str, password: str, domain: str):
     return True
 
 @app.get("/create_server")
-def create_server(username: str, password: str, domain: str):
-    token = Connect.get_admin_token(username, password, domain)
-    # images = Connect.get_image_list(token)['images']
-    # for image in images:
-    #     print(image['id']+" "+image['name'])
-    server = Connect.create_server(token)
-    print(server.content)
-    return True
+def create_server():
+    server = Connect.create_server()
+    return server.content
