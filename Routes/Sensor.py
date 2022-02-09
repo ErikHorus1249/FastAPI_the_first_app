@@ -70,3 +70,18 @@ def delete_all_doc():
         return True
     else:
         return False
+
+@sensor.get("/Data/{time}/minutes", response_description="Test")
+def get_data_during(time: int):
+    present = now()
+    time = present - time*60
+    data = []
+    # res.append(doc for doc in conn.Sensor.find({}) if doc['timestamp'] >= time and doc['timestamp'] <= present)
+    res = conn.Sensor.find({})
+    
+    for rp in res:
+        if rp['timestamp'] <= present and rp['timestamp']: 
+            data.append(SensorSavingModel.parse_obj(rp))    
+        
+    return data
+    
