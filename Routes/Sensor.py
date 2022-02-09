@@ -80,7 +80,7 @@ def get_data_during(time: int):
     res = conn.Sensor.find({})
     
     for rp in res:
-        if rp['timestamp'] <= present and rp['timestamp']: 
+        if rp['timestamp'] <= present and rp['timestamp'] >= time: 
             data.append(SensorSavingModel.parse_obj(rp))    
         
     return data
