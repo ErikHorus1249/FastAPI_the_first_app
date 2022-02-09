@@ -37,6 +37,7 @@ class TempvsHumiModel(BaseModel):
     mois: float
     
 class SensorEntryModel(BaseModel):
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     accX: float
     accY: float
     accZ: float
@@ -49,6 +50,12 @@ class SensorEntryModel(BaseModel):
     rain: float
     updatedAt: str
     timestamp: float
+    
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: str}
+
     
 class SensorSavingModel(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
@@ -64,6 +71,11 @@ class SensorSavingModel(BaseModel):
     rain: float
     updatedAt: str
     timestamp: float
+    
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: str}
         
 # class SensorSavingModel(BaseModel):
 #     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
