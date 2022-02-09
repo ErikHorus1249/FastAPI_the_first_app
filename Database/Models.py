@@ -49,6 +49,21 @@ class SensorEntryModel(BaseModel):
     rain: float
     updatedAt: str
     timestamp: float
+    
+class SensorSavingModel(BaseModel):
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+    accX: float
+    accY: float
+    accZ: float
+    gyX: float
+    gyY: float
+    gyZ: float
+    temp: float
+    humi: float
+    mois: float
+    rain: float
+    updatedAt: str
+    timestamp: float
         
 # class SensorSavingModel(BaseModel):
 #     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")

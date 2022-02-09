@@ -33,7 +33,7 @@ async def get_root():
     """
 
 # @sensor.post("/Sensors", response_description="Import new data", response_model=SensorSavingModel)
-@sensor.post("/Sensors", response_description="Import new data")
+@sensor.post("/Sensors", response_description="Import new data", response_model=SensorEntryModel)
 async def save_sensors_data_to_DB(senData: SensorEntryModel):
     
     del senData.timestamp
@@ -45,12 +45,10 @@ async def save_sensors_data_to_DB(senData: SensorEntryModel):
     doc['timestamp'] = now()
     
     # fdoc = SensorSavingModel.parse_obj()
-    return True   
-    # if res := conn.Sensor.insert_one(doc):
-    #     # return True
-    #     return SensorSavingModel.parse_obj(conn.Sensor.find_one({'_id':ObjectId(res.inserted_id)})) 
-    # else:
-    #     return False
+    if res := conn.Sensor.insert_one(doc):
+        return SensorEntryModel.parse_obj(conn.Sensor.find_one({'_id':ObjectId(res.inserted_id)})) 
+    else:
+        return False
     
     
 @sensor.post("/Tests", response_description="Test", response_model=TestModel)
@@ -58,3 +56,17 @@ async def test_request(test: TestModel):
     
     return test
 
+
+@sensor.get("/Data", response_description="Test", response_model=SensorSavingModel)
+def get_newest_data():
+    res = conn.Sensor.find().sort("timestamp", -1)
+    
+    # print(type(res))
+    return SensorEntryModel.parse_obj(res[0])
+
+@sensor.delete("/Data/delete", response_description="Test",)
+def delete_all_doc():
+    if conn.Sensor.delete_many({}):
+        return True
+    else:
+        return False
