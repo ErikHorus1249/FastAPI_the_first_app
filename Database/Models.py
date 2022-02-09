@@ -37,24 +37,32 @@ class TempvsHumiModel(BaseModel):
     mois: float
     
 class SensorEntryModel(BaseModel):
-    acc: AccelerometerModel
-    gy: GyroscopeModel
-    tvh: TempvsHumiModel
-    rain: float
-        
-class SensorSavingModel(BaseModel):
-    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
-    acc: AccelerometerModel
-    gy: GyroscopeModel
-    tvh: TempvsHumiModel
+    accX: float
+    accY: float
+    accZ: float
+    gyX: float
+    gyY: float
+    gyZ: float
+    temp: float
+    humi: float
+    mois: float
     rain: float
     updatedAt: str
     timestamp: float
+        
+# class SensorSavingModel(BaseModel):
+#     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+#     acc: AccelerometerModel
+#     gy: GyroscopeModel
+#     tvh: TempvsHumiModel
+#     rain: float
+#     updatedAt: str
+#     timestamp: float
     
-    class Config:
-        allow_population_by_field_name = True
-        arbitrary_types_allowed = True
-        json_encoders = {ObjectId: str}
+#     class Config:
+#         allow_population_by_field_name = True
+#         arbitrary_types_allowed = True
+#         json_encoders = {ObjectId: str}
     
 # class SensorSavingModel(BaseModel):
 #     email: str
