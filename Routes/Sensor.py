@@ -34,10 +34,7 @@ async def get_root():
 
 # @sensor.post("/Sensors", response_description="Import new data", response_model=SensorSavingModel)
 @sensor.post("/Sensors", response_description="Import new data", response_model=SensorEntryModel)
-async def save_sensors_data_to_DB(senData: SensorEntryModel):
-    
-    del senData.timestamp
-    del senData.updatedAt
+async def save_sensors_data_to_DB(senData: SensorEntityModel):
     
     doc = dict((k, v) for k, v in senData.dict().items() if v is not None)
     

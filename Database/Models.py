@@ -55,7 +55,18 @@ class SensorEntryModel(BaseModel):
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
-
+        
+class SensorEntityModel(BaseModel):
+    accX: float
+    accY: float
+    accZ: float
+    gyX: float
+    gyY: float
+    gyZ: float
+    temp: float
+    humi: float
+    mois: float
+    rain: float
     
 class SensorSavingModel(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
